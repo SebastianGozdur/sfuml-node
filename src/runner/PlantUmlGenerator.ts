@@ -17,8 +17,8 @@ var request = require('request');
 
 export class PlantUmlGenerator {
 
-    public communicateWithToolingAPI(bearerKey: string, instanceUrl: string, target: string): void {
-        let config: Config = new ConfigService().getConfigObject();
+    public communicateWithToolingAPI(bearerKey: string, instanceUrl: string, target: string, configPath: string): void {
+        let config: Config = new ConfigService().getConfigObject(configPath);
         let query;
         let queryService: QueryService = new QueryService()
             .initiateQuery()
@@ -45,7 +45,6 @@ export class PlantUmlGenerator {
         }, function (err: any, res: any, jsonBody: string) {
             let jsonObject: any = JSON.parse(jsonBody);
             let toolingApiResponse: ToolingApiResponse = <ToolingApiResponse>jsonObject;
-
             new PlantUmlGenerator().processToolingApiResponse(toolingApiResponse, target);
         });
     }
