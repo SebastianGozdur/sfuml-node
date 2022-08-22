@@ -3,6 +3,7 @@ import {Method} from '../model/Method';
 import {TableDeclaration} from '../model/TableDeclaration';
 import {Variable} from '../model/Variable';
 import {Property} from '../model/Property';
+import {InnerClass} from "./InnerClass";
 
 export interface SymbolTable {
 
@@ -16,4 +17,5 @@ export interface SymbolTable {
     parentClass: string;
     interfaces: string[];
     properties: Property[];
+    innerClasses: InnerClass[];
 }
