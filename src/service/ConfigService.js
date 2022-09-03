@@ -26,10 +26,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConfigService = void 0;
 const fs = __importStar(require("fs"));
 class ConfigService {
-    getConfigObject() {
-        let configBody = fs.readFileSync(__dirname + '\\..\\..\\config\\config.json').toString();
-        let config = JSON.parse(configBody);
-        return config;
+    getConfigObject(path) {
+        let configBody = fs.readFileSync(path).toString();
+        return JSON.parse(configBody);
     }
 }
 exports.ConfigService = ConfigService;
