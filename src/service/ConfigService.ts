@@ -3,10 +3,8 @@ import {Config} from '../model/config/Config';
 
 export class ConfigService {
 
-    public getConfigObject(): Config {
-        let configBody = fs.readFileSync(__dirname + '\\..\\..\\config\\config.json').toString();
-        let config: Config = JSON.parse(configBody);
-
-        return config;
+    public getConfigObject(path: string): Config {
+        let configBody = fs.readFileSync(path).toString();
+        return JSON.parse(configBody);
     }
 }
