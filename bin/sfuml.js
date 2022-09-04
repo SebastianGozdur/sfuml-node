@@ -21,8 +21,7 @@ var argv = require('yargs/yargs')(process.argv.slice(2))
     })
     .option('configpath', {
         describe: 'Config json path',
-        type: 'string',
-        demandOption: true
+        type: 'string'
     })
     .argv;
 new SUmlRunner_1.SUmlRunner().generateUml(argv.target, argv.bearer, argv.instanceurl, argv.configpath);

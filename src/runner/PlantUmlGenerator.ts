@@ -18,14 +18,17 @@ var request = require('request');
 export class PlantUmlGenerator {
 
     public communicateWithToolingAPI(bearerKey: string, instanceUrl: string, target: string, configPath: string): void {
-        let config: Config = new ConfigService().getConfigObject(configPath);
+        let config: Config = {generateUMLForClasses : []};
+        if (configPath) {
+            config = new ConfigService().getConfigObject(configPath);
+        }
         let query;
         let queryService: QueryService = new QueryService()
             .initiateQuery()
             .withFields(['Name,SymbolTable'])
             .withObject('ApexClass');
 
-        if (config.generateUMLForClasses && config.generateUMLForClasses.length > 0) {
+        if (config != null && config.generateUMLForClasses && config.generateUMLForClasses.length > 0) {
             query = queryService
                 .withWhere()
                 .withFieldCondition('Name')
@@ -192,7 +195,6 @@ export class PlantUmlGenerator {
         }
         return 0;
     }
-
 
     private processExtension(parentClass: string): string {
         if (parentClass) {

@@ -9,13 +9,18 @@ const { exec } = require("child_process");
 var request = require('request');
 class PlantUmlGenerator {
     communicateWithToolingAPI(bearerKey, instanceUrl, target, configPath) {
-        let config = new ConfigService_1.ConfigService().getConfigObject(configPath);
+        let config = { generateUMLForClasses: [] };
+        console.log('CONFIG');
+        console.log(configPath);
+        if (configPath) {
+            config = new ConfigService_1.ConfigService().getConfigObject(configPath);
+        }
         let query;
         let queryService = new QueryService_1.QueryService()
             .initiateQuery()
             .withFields(['Name,SymbolTable'])
             .withObject('ApexClass');
-        if (config.generateUMLForClasses && config.generateUMLForClasses.length > 0) {
+        if (config != null && config.generateUMLForClasses && config.generateUMLForClasses.length > 0) {
             query = queryService
                 .withWhere()
                 .withFieldCondition('Name')
